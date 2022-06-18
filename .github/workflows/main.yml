@@ -23,7 +23,5 @@ jobs:
       # Runs a single command using the runners shell
       - name: Start Node
         run: |
-        npm install
-        npm run getAPI
-
-        
+          npm install
+          npm run getAPI
