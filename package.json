@@ -4,10 +4,13 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "preview": "nuxt preview",
+    "getAPI": "node getAPI.js"
   },
   "devDependencies": {
     "microcms-field-extension-api": "^1.0.0",
-    "nuxt": "3.0.0-rc.4"
+    "node-fetch": "^3.2.6",
+    "nuxt": "3.0.0-rc.4",
+    "sass": "^1.52.3"
   }
 }
