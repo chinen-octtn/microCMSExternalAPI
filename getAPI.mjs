@@ -12,15 +12,24 @@ const loop = setInterval(() => {
 
   const pokeData = responseData.results[count]
 
-  const deletePost = (id) => {
-    if (id) {
-      fetch(`https://external-api.microcms.io/api/v1/poke/${id}`, {
-        method: 'DELETE',
-        headers: {
-          'X-MICROCMS-API-KEY': '9fa2e135ed5c4d6e90794ada6972c939675f',
-        },
-      })
-    }
+  const fetchPost = (content, id) => {
+    const endpoint = 'https://external-api.microcms.io/api/v1/poke'
+    const postID = id ? `/${id}` : '/'
+    const method = id ? 'PATCH' : 'POST'
+
+    console.log(`${method}: ${content.name}`)
+
+    fetch(`${endpoint}${postID}`, {
+      method: method,
+      headers: {
+        'Content-Type': 'application/json',
+        'X-MICROCMS-API-KEY': '9fa2e135ed5c4d6e90794ada6972c939675f',
+      },
+      body: JSON.stringify({
+        name: content.name,
+        url: content.url,
+      }),
+    })
   }
 
   fetch(
@@ -35,21 +44,11 @@ const loop = setInterval(() => {
     .then((response) => response.json())
     .then((data) => {
       if (data.totalCount) {
-        deletePost(data.contents[0].id)
+        fetchPost(pokeData, data.contents[0].id)
+      } else {
+        fetchPost(pokeData)
       }
     })
-
-  fetch(`https://external-api.microcms.io/api/v1/poke/`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-MICROCMS-API-KEY': '9fa2e135ed5c4d6e90794ada6972c939675f',
-    },
-    body: JSON.stringify({
-      name: pokeData.name,
-      url: pokeData.url,
-    }),
-  })
 
   count++
 }, 1000)
