@@ -1,3 +1,7 @@
+# microCMS で外部 API を参照する Sample
+
+こちらの[記事](https://zenn.dev/ryusou/articles/microcms-pokemon-field)を参考にして実装を進める。
+
 # Nuxt 3 Minimal Starter
 
 Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
