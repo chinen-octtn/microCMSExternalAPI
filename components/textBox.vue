@@ -1,6 +1,6 @@
 <template>
+  <h2>検索結果</h2>
   <ul class="text" v-if="props.result.length !== 0">
-    <p>検索結果</p>
     <template v-for="item in props.result">
       <li>
         <a :href="item.url">{{ item.name }}</a>

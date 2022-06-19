@@ -1,6 +1,7 @@
 <script setup>
 const api = 'https://external-api.microcms.io/api/v1/poke'
 const query = ref()
+const isSearch = ref(false)
 
 const endpoint = ref(`${api}?q=${query.value}&fields=name,url`)
 
@@ -14,13 +15,12 @@ const { data: searchResult, pending } = useLazyAsyncData('getAPI', () =>
 )
 
 const searchAPI = () => {
-  console.log('検索')
+  isSearch.value = true
   endpoint.value = `${api}?q=${query.value}&fields=name,url`
   refreshNuxtData('getAPI')
 }
 
 onMounted(() => {
-  console.log(document.searchForm)
   const form = document.searchForm
   form.addEventListener('submit', searchAPI)
 })
@@ -33,8 +33,10 @@ onMounted(() => {
       <Input :value="query" v-model="query" />
       <ApiButton text="検索" @click="searchAPI" />
     </form>
-    <p v-if="pending">Loading...</p>
-    <textBox v-else :result="searchResult.contents" />
+    <template v-if="isSearch">
+      <p v-if="pending">Loading...</p>
+      <textBox v-else :result="searchResult.contents" />
+    </template>
   </div>
 </template>
 
