@@ -5,6 +5,13 @@ const isSearch = ref(false)
 
 const endpoint = ref(`${api}?q=${query.value}&fields=name,url`)
 
+const { data: allData } = useFetch(`${api}?fields=name,url`, {
+  method: 'GET',
+  headers: {
+    'X-MICROCMS-API-KEY': '9fa2e135ed5c4d6e90794ada6972c939675f',
+  },
+})
+
 const { data: searchResult, pending } = useLazyAsyncData('getAPI', () =>
   $fetch(`${endpoint.value}`, {
     method: 'GET',
@@ -37,6 +44,11 @@ onMounted(() => {
       <p v-if="pending">Loading...</p>
       <textBox v-else :result="searchResult.contents" />
     </template>
+
+    <dl class="text">
+      <dt>CMSに入っているデータ</dt>
+      <dd>{{ allData.contents }}</dd>
+    </dl>
   </div>
 </template>
 
@@ -47,5 +59,11 @@ onMounted(() => {
 }
 input {
   width: 40%;
+}
+
+.text {
+  border: 1px solid #ccc;
+  padding: 1em;
+  margin-top: 5rem;
 }
 </style>
