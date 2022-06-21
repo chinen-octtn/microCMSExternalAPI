@@ -2,19 +2,19 @@
 
 こちらの[記事](https://zenn.dev/ryusou/articles/microcms-pokemon-field)を参考にする。
 
-上記の実装に近いのは方法 2 だが、「外部 API の情報を microCMS で扱いたい」のが今回の目的のため、方法 1 の Sample を優先して制作する。
+上記の実装に近いのは方法 2 だが、「外部 API の情報を microCMS で扱いたい」のが今回の目的のため、方法 1 を優先して Sample 制作する。
 
-※調査も兼ねて急いで雑に作っている部分もあるのでもっと効率良い構築方法があればアドバイス歓迎
+※調査も兼ねて急いでいるため雑に作っている部分もあり、もっと効率良い構築方法があればアドバイス歓迎
 
 ## 方法 1：外部 API から受け取った情報を定期的に microCMS に POST（PATCH）する
 
-microCMS の API で POST すると投稿データを新規作成できる。
+microCMS の POST API で投稿データを新規作成できる。
 
 https://document.microcms.io/content-api/post-content
 
-1. microCMS で管理用の API を作成する（Sample では Hobby プランでも OK）
+1. 事前に microCMS で管理用の API を作成する（Sample では Hobby プランでも OK）
 2. GitHub Actions で script を定期実行して外部 API を fetch する
-3. fetch したデータを microCMS のフィールド構造と合わせて整形する
+3. fetch したデータを microCMS のフィールド構造に合わせて整形する
 4. 整形したデータを microCMS へ POST する
 5. すでにデータが存在する場合は削除 or 上書きする
 
